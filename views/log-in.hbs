@@ -1,18 +1,19 @@
 <div class="box">
   <div class="center">
     <h1>log-in</h1>
-    {{!-- <p>create your account today to view exclusive offers and reserve dream house.</p> --}}
-    <form>
+    <form method="post" action="/log-in">
       <div class="inputbox">
-        <input type="text" required="required" />
-        <span>Email</span>
+        <label for="email"></label>
+        <input type="text" id="email" name = "email" placeholder="Email"/><br>
       </div>
+      
       <div class="inputbox">
-        <input type="text" required="required" />
-        <span>Password</span>
+        <label for="password"></label>
+        <input type="password" id="password" name = "password" placeholder="Password"/><br>
       </div>
-      <div class="inputbox subbut">
-        <input type="button" value="submit" />
+
+      <div class="inputbox">
+        <input type="submit" value="log-in" />
       </div>
     </form>
   </div>
