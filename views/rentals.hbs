@@ -1,0 +1,16 @@
+<article> <!-- is article needed here??? -->
+
+    <h1 id = "rentalHeading">Your city choice matters!</h1>
+
+    {{#each distinguishProperty}}
+    <div>
+        <h1> {{cityProvince}} </h1>
+    </div>
+    <div class="rentalsGroup">
+        {{#each rentals}}
+        {{>rental}}
+        {{/each}}
+    </div>
+    {{/each}}
+
+</article>

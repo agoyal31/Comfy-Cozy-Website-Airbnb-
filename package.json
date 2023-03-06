@@ -1,0 +1,15 @@
+{
+  "name": "enjoyvacation",
+  "version": "1.0.0",
+  "description": "Road to fully working website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Avni Goyal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.7"
+  }
+}

@@ -1,0 +1,63 @@
+
+    <article class="mainSection">
+        <img id = "hero" src="/images/hero.jpg" alt="Beautiful property">
+
+        <div class="hero-text">
+            <h2>Make Memories, Beyond Expectations</h2>
+        </div>
+
+    </article>
+    <article class="facilities">
+      <div class="first-facility">
+        <div class="iconf">
+            <div class="material-icons">hot_tub</div>
+            <div class = "textf">Enjoy, Heal  relax in water</div>
+        </div>
+        <div class="f-text">All houses are built near the hot springs or have jacuzzi inside it.</div>
+    </div>
+      
+      <div class="second-facility">
+        <div class="iconf">
+            <div class="material-icons">forest</div>
+            <div class = "textf">Home to nature</div>
+        </div>
+        <div class="f-text"> Enjoy the scenic beauty of misty land of hills and streams.</div>
+      </div>
+      <div class="third-facility">
+        <div class="iconf">
+            <div class="material-icons">sentiment_very_satisfied</div>
+            <div class = "textf">Customer satisfaction guaranteed</div>
+        </div>
+        <div class="f-text">24/7 support available for prestigious customer</div>
+      </div>
+    
+    </article>
+    <h2>Choose Destination</h2>
+    <article>
+        <div class="rentals">
+    {{#each rentalProperty}}
+    {{>rental}}
+    {{/each}}
+        </div>
+    </article>
+    {{!-- <article>
+        <div class="rentals">
+            <div class="pic-rentals">
+                <img src="/images/rentalSmall.jpg" alt="property1">
+                <h3>Wintage Hut House</h3>
+                <p>&#x2022 5BHK &#x2022 price:$350/night</p>
+            </div>
+            <div class="pic-rentals">
+            <img id="hi" src="/images/4rental.jpg" alt="property2">
+            <h3>House in Woods</h3>
+                <p>&#x2022 3BHK &#x2022 price:$200/night</p>
+            </div>
+            <div class="pic-rentals">
+            <img src="/images/3rdrental.jpg" alt="property3">
+            <h3>House with pool</h3>
+                <p>&#x2022 4BHK &#x2022 price:$300/night</p>
+            </div>
+        </div>
+    </article>
+
+  --}}

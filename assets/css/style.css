@@ -1,0 +1,463 @@
+ body{
+    margin: 0;
+}
+
+.navigationBar{
+    position: fixed;
+    margin-right: 0;
+    top:0;
+    left: 0;
+    right:0;
+    z-index: 1;
+} 
+
+.menubar{
+    opacity: 0.8;
+    display:flex;
+    background-color: rgb(236, 248, 253);
+    
+    flex-direction: row;
+    padding: 10px; 
+    justify-content: space-between;
+}
+
+.logo img{
+    height: 40px;
+}
+
+.options{
+    display:flex;
+    justify-content: space-evenly;
+    width: 50%;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    font-size: larger;
+    padding-top: 4px;
+    color: rgb(8, 3, 83);
+}
+
+.material-icons{
+    color:rgb(8, 3, 83);
+}
+
+.icon{
+    display: flex;
+}
+
+.icon:hover{
+    cursor: pointer;
+    border-radius: 5px;
+    transform: scale(1.0);
+    font-weight: bolder;
+    color: rgb(4, 1, 32);
+}
+
+main h1{
+    text-align: center;
+    background-color: rgb(8, 3, 83);
+   
+    color: rgb(236, 248, 253);
+}
+
+@media screen and (min-width:650px){
+main article #rentalHeading{
+  padding-top: 77px;
+  margin-top: 0;
+  font-size: xx-large;
+}
+}
+
+/* main{
+    margin-top:77px;
+} */
+@media screen and (max-width:650px){
+    .menubar{
+        flex-direction: column;
+        align-items: center;
+    }
+  .logo{
+    display: none;
+  }
+  .options{
+    flex-direction: column;
+  }
+  main .box{
+    height: 100%;
+}
+main .center{
+   margin-top: 35px;
+   margin-bottom: 35px; 
+}
+  main{
+    margin-top: 150px;
+  }
+  .footer-box .column-flex .row1-flex{
+    flex-direction: column;
+  }
+  .row2-flex{
+    justify-content: center;
+  }
+  .row1-flex h3{
+    padding: 10px 0 5px 0;
+  }
+
+.icon{
+    padding: 5px;
+     width: 150px;
+    border: 2px solid rgb(172, 171, 170); 
+    margin-bottom: 3px;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+
+
+.mainSection{
+    margin-right: 0.5%;
+} 
+
+}
+
+@media screen and (max-width:520px){
+     main .facilities{
+        grid-template-columns: repeat(1,1fr);
+        row-gap: 17px;
+    }
+     main .rentals{
+        grid-template-columns: repeat(1,1fr);
+        row-gap: 15px;
+    }
+    footer .footer-box{
+        padding: 0 0 0 0;
+    }
+    body footer{
+        padding-bottom:130px;
+        margin-top:100px;
+    }
+    article .rentalsGroup{
+            display:grid;
+            background-color: rgb(245, 248, 250);
+            grid-template-columns: repeat(1, 1fr);
+            padding: 0 35px 0 35px;
+            column-gap: 30px;
+    }
+}
+
+.hero-text{
+    opacity: 0.6;
+    position: absolute;
+    top:75%;
+    left:35%;
+    border-radius: 2px;
+    background-color: rgb(251, 252, 252);
+   
+    font-weight: 750;
+    font-size: 25px;
+}
+
+.hero-text h2{
+    margin: 5px 0 5px 0;
+    color: rgb(0, 12, 3);
+    padding-bottom: 10px;
+}
+.mainSection{
+
+    height: 500px;
+    position: relative;
+}
+
+#hero{
+    width: 100%;
+    height: 100%;
+    margin-right: 0px;
+    object-fit: cover;
+}
+
+.facilities{
+    display: grid;
+    background-color: rgb(236, 236, 236);
+    padding: 15px 15px 15px 15px;
+    margin-top: 70px;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 15px;
+}
+
+.first-facility, .second-facility, .third-facility{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    background-color: rgb(245, 248, 250);
+    border-radius: 8px;
+    row-gap: 32px;
+}
+
+.third-facility .f-text{
+    margin-top: 10px;
+}
+
+.iconf{
+    display:flex;
+    font-size: 20px;
+    color:rgb(8, 3, 83);
+    width: 100%;
+    justify-content: center;
+}
+
+.iconf .material-icons{
+    font-size: 30px;
+    padding-right: 5px;
+}
+
+.textf{
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.f-text{
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(85, 84, 84);
+    padding-bottom: 15px;
+}
+
+h2{
+    margin-top: 60px;
+    margin-bottom: 0;
+    padding: 10px 0px 25px 0;
+    font-size: 30px;
+    color:rgb(8, 3, 83);
+    background-color: rgb(245, 248, 250);
+    text-align: center;
+}
+
+.rentals{
+    display:grid;
+    background-color: rgb(245, 248, 250);
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 35px 0 35px;
+    column-gap: 15px;
+}
+
+.rentalsGroup{
+    display:grid;
+    background-color: rgb(245, 248, 250);
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 35px 0 35px;
+    column-gap: 15px;
+}
+
+.pic-rentals img{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: rgb(245, 248, 250);
+}
+
+.pic-rentals{
+    border-radius: 4px;
+    background-color: rgb(245, 248, 250);
+}
+
+.rentalsGroup .pic-rentals{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.pic-rentals:hover{
+    transform: scale(1.1);
+    box-shadow: 10px 10px 10px 0px rgb(53, 53, 53);
+    transition: 0.5s;
+    z-index: 0;
+}
+
+.rentals h3{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-family: cursive;
+    color:rgb(8, 3, 83)
+}
+.rentals p{
+    margin-top: 0px;
+    text-align: center;  
+    font-family: cursive;
+    color: rgb(73, 73, 73);
+}
+
+.rentalsGroup h3{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-family: cursive;
+    color:rgb(8, 3, 83)
+}
+.rentalsGroup p{
+    margin-top: 0px;
+    text-align: center;  
+    font-family: cursive;
+    color: rgb(73, 73, 73);
+}
+footer{
+    margin-top: 140px;
+    padding: 50px 0;
+    background-color: rgb(245, 248, 250);
+}
+
+.footer-box{
+    margin: 0 50px 0 50px;
+    padding: 0 80px 0 80px;
+    /* width: 100%; */
+}
+.column-flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.row1-flex{
+    padding-bottom: 20px;
+}
+
+.row1-flex, .row2-flex, .row3-flex, .dec{
+    display: flex;
+    flex-direction: row;
+}
+
+.row1-flex .widthrow1, .dec{
+    flex-basis: 33.33%;
+    padding: 0 15px 0 15px;
+}
+
+.row1-flex h3{
+    margin-top: 2px;
+    margin-bottom: 6px;
+    color:rgb(8, 3, 83);
+}
+
+.row1-flex a{
+    display: block;
+    text-decoration: none;
+    color: rgb(95, 94, 94);
+    font-size: medium;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.hr-line {
+    width: 100%;
+    position: relative;
+    margin: 15px;
+    border-bottom: 1px solid rgb(95, 94, 94);
+  }
+  .hr-icon {
+    position: relative;
+    top: 17px;
+    color: rgb(23, 16, 117);
+    padding: 10px;
+    font-size: xx-large;
+  }
+
+  .hr-icon:hover i{
+   
+    color: rgb(74, 74, 74);
+   
+  }
+ 
+ 
+ .dec, .copyright{
+    padding-top: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(73, 73, 73);
+    text-align: center;
+ }
+
+ .row3-flex{
+    justify-content: center;
+    padding-top: 5px;
+ }
+
+ .box{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150vh;
+    background: linear-gradient(45deg, greenyellow, dodgerblue);
+    font-family: "Sansita Swashed", cursive;
+ }
+
+ .box .center form .subbut{
+    position: relative;
+    left: auto;
+    right: auto;
+ }
+ .center {
+    position: relative;
+    padding: 50px 50px;
+    background: #fff;
+    border-radius: 10px;
+  }
+  .center h1 {
+    font-size: 2em;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    color: #000;
+    letter-spacing: 5px;
+    margin-bottom: 60px;
+    font-weight: bold;
+    padding-left: 10px;
+    margin-bottom: 0;
+    margin-top: 15px;
+  }
+  .center p{
+    text-align: center;
+    color: dodgerblue;
+    font-weight: bold;
+    margin-top: 0;
+  }
+  .center .inputbox {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  .center .inputbox input {
+    border: 2px solid #000;
+    outline: none;
+    background: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2em;
+  }
+  .center .inputbox:last-child {
+    margin-bottom: 0;
+  }
+  .center .inputbox span {
+    position: absolute;
+    top: 14px;
+    left: 20px;
+    font-size: 1em;
+    transition: 0.6s;
+    font-family: sans-serif;
+  }
+  .center .inputbox input:focus ~ span,
+  .center .inputbox input:valid ~ span {
+    transform: translateX(-13px) translateY(-35px);
+    font-size: 1em;
+  }
+  .center .inputbox [type="button"] {
+    width: 50%;
+    background: dodgerblue;
+    color: #fff;
+    border: #fff;
+  }
+  .center .inputbox:hover [type="button"] {
+    background: linear-gradient(45deg, greenyellow, dodgerblue);
+  }
+
