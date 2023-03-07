@@ -6,7 +6,7 @@
 
         <div class="inputbox">
           <label for="firstName"></label>
-        <input type="text" id="firstName" name = "firstName" placeholder="First Name"/><br>
+        <input type="text" id="firstName" name = "firstName" placeholder="First Name" value="{{values.firstName}}"/><br>
         {{#if toDisplayValidationMessage.firstName}}
         <span style="color:red;">{{toDisplayValidationMessage.firstName}}</span><br>
         {{/if}}
@@ -14,7 +14,7 @@
       
       <div class="inputbox">
         <label for="lastName"></label>
-        <input type="text" id="lastName" name = "lastName" placeholder="Last Name"/><br>
+        <input type="text" id="lastName" name = "lastName" placeholder="Last Name" value="{{values.lastName}}"/><br>
          {{#if toDisplayValidationMessage.lastName}}
         <span style="color:red;">{{toDisplayValidationMessage.lastName}}</span><br>
         {{/if}}
@@ -22,7 +22,7 @@
 
       <div class="inputbox">
         <label for="email"></label>
-        <input type="text" id="email" name = "email" placeholder="Email"/><br>
+        <input type="text" id="email" name = "email" placeholder="Email" value="{{values.email}}"/><br>
         {{#if toDisplayValidationMessage.email}}
         <span style="color:red;">{{toDisplayValidationMessage.email}}</span><br>
         {{/if}}
@@ -30,7 +30,7 @@
       
       <div class="inputbox">
         <label for="password"></label>
-        <input type="password" id="password" name = "password" placeholder="Password"/><br>
+        <input type="password" id="password" name = "password" placeholder="Password" value="{{values.password}}"/><br>
         {{#if toDisplayValidationMessage.password}}
         <span id = "wrap-it" style="color:red;">{{toDisplayValidationMessage.password}}</span><br>
         {{/if}}
