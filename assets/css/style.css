@@ -438,26 +438,26 @@ footer{
   .center .inputbox:last-child {
     margin-bottom: 0;
   }
-  .center .inputbox span {
+  /* .center .inputbox span {
     position: absolute;
     top: 14px;
     left: 20px;
     font-size: 1em;
     transition: 0.6s;
     font-family: sans-serif;
-  }
+  } */
   .center .inputbox input:focus ~ span,
   .center .inputbox input:valid ~ span {
     transform: translateX(-13px) translateY(-35px);
     font-size: 1em;
   }
-  .center .inputbox [type="button"] {
+  .center .inputbox [type="submit"] {
     width: 50%;
     background: dodgerblue;
     color: #fff;
     border: #fff;
   }
-  .center .inputbox:hover [type="button"] {
+  .center .inputbox:hover [type="submit"] {
     background: linear-gradient(45deg, greenyellow, dodgerblue);
   }
 
