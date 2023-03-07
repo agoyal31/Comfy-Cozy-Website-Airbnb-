@@ -24,6 +24,9 @@ app.engine(".hbs", exphbs.engine({
 }));
 app.set("view engine", ".hbs");
 
+//set up body parser
+app.use(express.urlencoded({ extended: false }));
+
 // Set up "assets" folder so it is public.
 app.use(express.static(path.join(__dirname, "/assets")));
 
@@ -52,6 +55,52 @@ app.get("/rentals",(req,res)=>{
         distinguishProperty: models.getRentalsByCityAndProvince()
     });
 });
+/////////////////////////////////////////////////////////////////////////////////
+app.post("/sign-up", (req, res) => {
+    console.log(req.body);
+    //amended
+    const { firstName, lastName, email, password } = req.body;
+    //   res.render("sign-up",{
+    //      title:"sign-up"
+    //     });
+    //amended
+    //const {firstName,lastName,email,password} = req.body;
+    const { passedValidation, validationMessage } =
+      validation.registrationValidation({ firstName, lastName, email, password });
+    // console.log(passedValidation);
+    if (passedValidation){
+         res.render("welcome", {
+            title: "welcome Page",
+          });
+    }
+    else {
+        res.render("sign-up", {
+          title: "sign-up",
+          toDisplayValidationMessage: validationMessage,
+
+        });
+      }
+});
+
+
+app.post("/log-in", (req, res) => {
+    console.log(req.body);
+    const { email, password } = req.body;
+    const { isValid, validateMessage } = validation.loginValidation({
+      email,
+      password,
+    });
+    if (isValid) {
+      res.render("welcome", {
+        title: "welcome Page",
+      });
+    } else {
+      res.render("log-in", {
+        title: "log-in",
+        printMessages: validateMessage,
+      });
+    }
+  });
 
 // *** DO NOT MODIFY THE LINES BELOW ***
 
