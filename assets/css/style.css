@@ -247,8 +247,10 @@ h2{
     display:grid;
     background-color: rgb(245, 248, 250);
     grid-template-columns: repeat(2, 1fr);
-    padding: 0 35px 0 35px;
-    column-gap: 15px;
+    padding: 0 70px 0 70px;
+    column-gap: 70px;
+    row-gap: 70px;
+    
 }
 
 .pic-rentals img{
@@ -263,14 +265,14 @@ h2{
     background-color: rgb(245, 248, 250);
 }
 
-.rentalsGroup .pic-rentals{
+/* .rentalsGroup .pic-rentals{
     padding-left: 40px;
     padding-right: 40px;
-}
+} */
 
 .pic-rentals:hover{
-    transform: scale(1.1);
-    box-shadow: 10px 10px 10px 0px rgb(53, 53, 53);
+    transform: scale(1.03);
+    box-shadow: 10px 10px 10px 10px rgb(53, 53, 53);
     transition: 0.5s;
     z-index: 0;
 }
