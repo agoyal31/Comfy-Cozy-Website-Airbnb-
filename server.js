@@ -12,7 +12,8 @@
 
 const path = require("path");
 const express = require("express");
-const models = require("./models/rentals-ds")
+const models = require("./models/view/rentals-ds")
+const validation = require("./models/view/validation")
 const exphbs = require("express-handlebars"); 
 const app = express();
 
