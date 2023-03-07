@@ -15,6 +15,9 @@ const express = require("express");
 const models = require("./models/view/rentals-ds")
 const validation = require("./models/view/validation")
 const exphbs = require("express-handlebars"); 
+//set up dot env
+const dotenv = require("dotenv");
+dotenv.config({path:"./dotenv/sendgridKey.env"});
 const app = express();
 
 // Set up Handlebars
@@ -69,8 +72,28 @@ app.post("/sign-up", (req, res) => {
       validation.registrationValidation({ firstName, lastName, email, password });
     // console.log(passedValidation);
     if (passedValidation){
-         res.render("welcome", {
-            title: "welcome Page",
+        const sgMail = require("@sendgrid/mail");
+        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+         const msg = {
+          to: req.body.email,
+          from: "avnigoel113@gmail.com",
+          subject: "Registration Confirmation at Comfy&Cozy",
+          html: `Hello ${req.body.firstName}, Thank you for Registration at Comfy&Cozy. I am Avni, here to welcome you and wishing good luck for your stay or booking. I am here for further assistance, feel free to reach out to me.`,
+        };
+        sgMail.send(msg)
+          .then(() => {
+            res.render("welcome", {
+              title: "welcome Page",
+            });
+            // res.send("success,validation passed and email has been sent!")
+          })
+          .catch((err) => {
+            console.log(err);
+            res.render("sign-up", {
+              title: "sign-up",
+              toDisplayValidationMessage: validationMessage,
+              values: req.body,
+            });
           });
     }
     else {
