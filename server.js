@@ -77,7 +77,7 @@ app.post("/sign-up", (req, res) => {
         res.render("sign-up", {
           title: "sign-up",
           toDisplayValidationMessage: validationMessage,
-
+          values: req.body,
         });
       }
 });
@@ -98,6 +98,7 @@ app.post("/log-in", (req, res) => {
       res.render("log-in", {
         title: "log-in",
         printMessages: validateMessage,
+        values: req.body,
       });
     }
   });
