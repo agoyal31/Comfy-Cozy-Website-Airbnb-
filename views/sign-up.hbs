@@ -7,21 +7,33 @@
         <div class="inputbox">
           <label for="firstName"></label>
         <input type="text" id="firstName" name = "firstName" placeholder="First Name"/><br>
+        {{#if toDisplayValidationMessage.firstName}}
+        <span style="color:red;">{{toDisplayValidationMessage.firstName}}</span><br>
+        {{/if}}
         </div>
       
       <div class="inputbox">
         <label for="lastName"></label>
         <input type="text" id="lastName" name = "lastName" placeholder="Last Name"/><br>
+         {{#if toDisplayValidationMessage.lastName}}
+        <span style="color:red;">{{toDisplayValidationMessage.lastName}}</span><br>
+        {{/if}}
       </div>
 
       <div class="inputbox">
         <label for="email"></label>
         <input type="text" id="email" name = "email" placeholder="Email"/><br>
+        {{#if toDisplayValidationMessage.email}}
+        <span style="color:red;">{{toDisplayValidationMessage.email}}</span><br>
+        {{/if}}
       </div>
       
       <div class="inputbox">
         <label for="password"></label>
         <input type="password" id="password" name = "password" placeholder="Password"/><br>
+        {{#if toDisplayValidationMessage.password}}
+        <span id = "wrap-it" style="color:red;">{{toDisplayValidationMessage.password}}</span><br>
+        {{/if}}
       </div>
       
       <div class="inputbox">
