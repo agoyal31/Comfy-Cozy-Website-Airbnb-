@@ -19,6 +19,7 @@ const exphbs = require("express-handlebars");
 const dotenv = require("dotenv");
 dotenv.config({path:"./dotenv/sendgridKey.env"});
 const app = express();
+var username;
 
 // Set up Handlebars
 app.engine(".hbs", exphbs.engine({
@@ -63,6 +64,7 @@ app.post("/sign-up", (req, res) => {
     console.log(req.body);
     //amended
     const { firstName, lastName, email, password } = req.body;
+    username = req.body.firstName;
     //   res.render("sign-up",{
     //      title:"sign-up"
     //     });
@@ -84,6 +86,7 @@ app.post("/sign-up", (req, res) => {
           .then(() => {
             res.render("welcome", {
               title: "welcome Page",
+              data: username
             });
             // res.send("success,validation passed and email has been sent!")
           })
