@@ -1,0 +1,62 @@
+<div class="box">
+  <div class="center">
+    <h1>log-in</h1>
+    {{#each errors}}
+    <p style="color:red;">{{this}}</p>
+    {{/each}}
+    <form method="post" action="/log-in">
+
+      <div class="inputbox">
+        <label for="email"></label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Email"
+          value="{{values.email}}"
+        /><br />
+        {{#if printMessages.email}}
+          <span style="color:red;">{{printMessages.email}}</span><br />
+        {{/if}}
+      </div>
+
+      <div class="inputbox">
+        <label for="password"></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          value="{{values.password}}"
+        /><br />
+        {{#if printMessages.password}}
+          <span style="color:red;">{{printMessages.password}}</span><br />
+        {{/if}}
+      </div>
+
+        <div>
+        <input
+          type="radio"
+          id="Clerk"
+          name="selected"
+          value="Clerk"
+        />
+        <label for="Clerk">Data Entry Clerk</label>
+        <input
+          type="radio"
+          id="Customer"
+          name="selected"
+          value="Customer"
+          checked
+        />
+        <label for="Customer">Customer</label>
+        </div>
+    
+      <br/>
+      <div class="inputbox">
+        <input type="submit" value="log-in" />
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -34,7 +34,15 @@
         {{#if toDisplayValidationMessage.password}}
         <span id = "wrap-it" style="color:red;">{{toDisplayValidationMessage.password}}</span><br>
         {{/if}}
+
       </div>
+
+       {{#if errors}}
+      <div>
+       <p style="color:red;">{{errors}}</p>
+      </div>
+      {{/if}}
+
       
       <div class="inputbox">
         <input type="submit" value="sign-up" />

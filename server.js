@@ -12,9 +12,11 @@
 
 const path = require("path");
 const express = require("express");
-const models = require("./models/view/rentals-ds")
-const validation = require("./models/view/validation")
+const session = require("express-session");
+const validation = require("./models/validation");
 const exphbs = require("express-handlebars"); 
+//set up mongoose
+const mongoose = require("mongoose");
 //set up dot env
 const dotenv = require("dotenv");
 dotenv.config({path:"./dotenv/sendgridKey.env"});
@@ -34,100 +36,30 @@ app.use(express.urlencoded({ extended: false }));
 // Set up "assets" folder so it is public.
 app.use(express.static(path.join(__dirname, "/assets")));
 
-// Add your routes here
-// e.g. app.get() { ... }
-// app.get("/", function(req,res){
-//     res.sendFile(path.join(__dirname, "/views/homePage.html"));
-// });
+//set up express-session
+app.use(session({
+  secret: process.env.SESSION_SECRET, //protect the cookies
+  resave: false,
+  saveUninitialized: true
+}));
 
-app.get("/",(req,res)=>{
-    res.render("home", {
-      rentalProperty: models.getFeaturedRentals()
-    });
+app.use((req,res,next)=>{
+  //res.locals.user is a global handlebars variable
+  //this means evry single handlebars file can access this variable
+  res.locals.user = req.session.user;
+  res.locals.isClerk = req.session.isClerk;//everytime the request comes in "req.session.user" it will be copied or passed to locals
+  next();
 });
 
-app.get("/sign-up",(req,res)=>{
-    res.render("sign-up");
-});
+//generalController
+const generalController = require("./controllers/generalController");
+app.use("/",generalController);
 
-app.get("/log-in",(req,res)=>{
-    res.render("log-in");
-});
-
-app.get("/rentals",(req,res)=>{
-    res.render("rentals",{
-        distinguishProperty: models.getRentalsByCityAndProvince()
-    });
-});
-/////////////////////////////////////////////////////////////////////////////////
-app.post("/sign-up", (req, res) => {
-    console.log(req.body);
-    //amended
-    const { firstName, lastName, email, password } = req.body;
-    username = req.body.firstName;
-    //   res.render("sign-up",{
-    //      title:"sign-up"
-    //     });
-    //amended
-    //const {firstName,lastName,email,password} = req.body;
-    const { passedValidation, validationMessage } =
-      validation.registrationValidation({ firstName, lastName, email, password });
-    // console.log(passedValidation);
-    if (passedValidation){
-        const sgMail = require("@sendgrid/mail");
-        sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-         const msg = {
-          to: req.body.email,
-          from: "avnigoel113@gmail.com",
-          subject: "Registration Confirmation at Comfy&Cozy",
-          html: `Hello ${req.body.firstName}, Thank you for Registration at Comfy&Cozy. I am Avni, here to welcome you and wishing good luck for your stay or booking. I am here for further assistance, feel free to reach out to me.`,
-        };
-        sgMail.send(msg)
-          .then(() => {
-            res.render("welcome", {
-              title: "welcome Page",
-              data: username
-            });
-            // res.send("success,validation passed and email has been sent!")
-          })
-          .catch((err) => {
-            console.log(err);
-            res.render("sign-up", {
-              title: "sign-up",
-              toDisplayValidationMessage: validationMessage,
-              values: req.body,
-            });
-          });
-    }
-    else {
-        res.render("sign-up", {
-          title: "sign-up",
-          toDisplayValidationMessage: validationMessage,
-          values: req.body,
-        });
-      }
-});
+//rentalsControllers
+const rentalsController = require("./controllers/rentalsController");
+app.use("/rentals",rentalsController);
 
 
-app.post("/log-in", (req, res) => {
-    console.log(req.body);
-    const { email, password } = req.body;
-    const { isValid, validateMessage } = validation.loginValidation({
-      email,
-      password,
-    });
-    if (isValid) {
-      res.render("welcome", {
-        title: "welcome Page",
-      });
-    } else {
-      res.render("log-in", {
-        title: "log-in",
-        printMessages: validateMessage,
-        values: req.body,
-      });
-    }
-  });
 
 // *** DO NOT MODIFY THE LINES BELOW ***
 
@@ -151,11 +83,22 @@ app.use(function (err, req, res, next) {
 // Define a port to listen to requests on.
 const HTTP_PORT = process.env.PORT || 8080;
 
+//connect to mongoDB
+mongoose.connect(process.env.MONGO_CONN_STRING,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(()=>{
+  console.log("Connected to MongoDB database")
+  // Listen on port 8080. The default port for http is 80, https is 443. We use 8080 here
+  // because sometimes port 80 is in use by other applications on the machine
+  app.listen(HTTP_PORT, onHttpStart);
+}).catch(err=>{
+  console.log(`Unable to connect to MongoDB database.....${err}`)
+})
+
 // Call this function after the http server starts listening for requests.
 function onHttpStart() {
     console.log("Express http server listening on: " + HTTP_PORT);
 }
   
-// Listen on port 8080. The default port for http is 80, https is 443. We use 8080 here
-// because sometimes port 80 is in use by other applications on the machine
-app.listen(HTTP_PORT, onHttpStart);
+

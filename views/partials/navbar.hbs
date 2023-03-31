@@ -6,10 +6,25 @@
             
         </div>
         <div class = "options">
-         <div class="icon">
+        <div class="icon">
             <div class="material-icons">home</div>
             <a href="/rentals">Rentals</a>
         </div>
+        {{#if user}}
+       <div class="icon">
+            <div class="material-icons"></div>
+            {{#if isClerk}}
+            <a href="/rentals/list">{{user.firstName}}</a>
+            {{else}}
+            <a href="/cart">{{user.firstName}}</a>
+            {{/if}}
+        </div>
+        <div class="icon">
+            <div class="material-icons">account_circle</div>
+            <a href="/logout">Logout</a>
+        </div>
+        {{else}}
+
         <div class="icon">
             <div class="material-icons">how_to_reg</div>
             <a href="/sign-up">Registration</a>
@@ -18,6 +33,7 @@
             <div class="material-icons">account_circle</div>
             <a href="/log-in">Login</a>
         </div>
+        {{/if}}
         </div>
         
     </div>
