@@ -42,21 +42,35 @@ app.use(express.static(path.join(__dirname, "/assets")));
 
 app.get("/",(req,res)=>{
     res.render("home", {
-      rentalProperty: models.getFeaturedRentals()
+      rentalProperty: models.getFeaturedRentals(),
+      title:"Home"
     });
 });
 
 app.get("/sign-up",(req,res)=>{
-    res.render("sign-up");
+    res.render("sign-up",{
+      title: "Registration"
+    });
 });
 
 app.get("/log-in",(req,res)=>{
-    res.render("log-in");
+    res.render("log-in",{
+      title: "Login"
+    });
 });
+
+app.get("/welcome",(req,res)=>{
+  res.render("welcome",{
+    title: "Welcome",
+    data: username
+  });
+});
+
 
 app.get("/rentals",(req,res)=>{
     res.render("rentals",{
-        distinguishProperty: models.getRentalsByCityAndProvince()
+        distinguishProperty: models.getRentalsByCityAndProvince(),
+        title: "Rentals Page"
     });
 });
 /////////////////////////////////////////////////////////////////////////////////
@@ -84,10 +98,7 @@ app.post("/sign-up", (req, res) => {
         };
         sgMail.send(msg)
           .then(() => {
-            res.render("welcome", {
-              title: "welcome Page",
-              data: username
-            });
+            res.redirect("/welcome");
             // res.send("success,validation passed and email has been sent!")
           })
           .catch((err) => {
@@ -117,9 +128,7 @@ app.post("/log-in", (req, res) => {
       password,
     });
     if (isValid) {
-      res.render("welcome", {
-        title: "welcome Page",
-      });
+      res.redirect("/welcome");
     } else {
       res.render("log-in", {
         title: "log-in",
