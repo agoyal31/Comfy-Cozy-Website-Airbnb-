@@ -4,11 +4,26 @@ const router = express.Router();
 const models = require("../models/rentals-ds");
 const validation = require("../models/validation");
 const userModel = require("../models/userModel");
+const rentalsModel = require("../models/rentalsModel")
+var username;
 
 router.get("/", (req, res) => {
-  res.render("general/home", {
-    rentalProperty: models.getFeaturedRentals(),
-  });
+  rentalsModel.find({
+    featuredRental:true
+  }).then(foundRental =>{
+    if (foundRental){
+    console.log("found the rentals" + foundRental)
+    let featuredRentalsHome = foundRental.map(value => value.toObject());
+    res.render("general/home", {
+      rentalProperty: featuredRentalsHome
+    })
+  }
+    else{ 
+      console.log("No featured rentals found from the rentals list")
+    }
+  }).catch(err => {
+    console.log(`Cannot try to find the rentals to display on homepage ${err}`)
+  })
 });
 
 router.get("/sign-up", (req, res) => {
@@ -20,7 +35,9 @@ router.get("/log-in", (req, res) => {
 });
 
 router.get("/welcome", (req, res) => {
-  res.render("general/welcome");
+  res.render("general/welcome",{
+    data: username
+  });
 });
 
 router.post("/sign-up", (req, res) => {
@@ -53,10 +70,7 @@ router.post("/sign-up", (req, res) => {
         sgMail
           .send(msg)
           .then(() => {
-            res.render("general/welcome", {
-              title: "welcome Page",
-              data: username,
-            });
+            res.redirect("/welcome");
           })
           .catch((err) => {
             console.log(err);

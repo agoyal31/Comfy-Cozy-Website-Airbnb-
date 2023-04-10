@@ -1,0 +1,133 @@
+<div class="box">
+  <div class="center">
+    <h1>Looking to add new rental property!</h1>
+    <p>you end up at right place</p>
+    <form action="/rentals/add" method="POST" enctype="multipart/form-data">
+
+      <div class="inputbox">
+        <label for="id"></label>
+        <input
+          type="hidden"
+          name="id"
+          value="{{id}}"
+        /><br />
+      </div>
+
+      <div class="inputbox">
+        <label for="headline"></label>
+        <input
+          type="text"
+          id="headline"
+          name="headline"
+          placeholder="headline"
+          value="{{values.headline}}"
+        /><br />
+      </div>
+
+      <div class="inputbox">
+        <label for="numSleeps"></label>
+        <input
+          type="number"
+          id="numSleeps"
+          name="numSleeps"
+          placeholder="numSleeps"
+          value="{{values.numSleeps}}"
+        /><br />
+        {{#if errStr.numSleeps}}
+          <p style="color: red;">{{errStr.numSleeps}}</p>
+        {{/if}}
+      </div>
+
+      <div class="inputbox">
+        <label for="numBedrooms"></label>
+        <input
+          type="number"
+          id="numBedrooms"
+          name="numBedrooms"
+          placeholder="numBedrooms"
+          value="{{values.numBedrooms}}"
+        /><br />
+        {{#if errStr.numBedrooms}}
+          <p style="color: red;">{{errStr.numBedrooms}}</p>
+        {{/if}}
+      </div>
+
+      <div class="inputbox">
+        <label for="numBathrooms"></label>
+        <input
+          type="number"
+          id="numBathrooms"
+          name="numBathrooms"
+          placeholder="numBathrooms"
+          value="{{values.numBathrooms}}"
+        /><br />
+        {{#if errStr.numBathrooms}}
+          <p style="color: red;">{{errStr.numBathrooms}}</p>
+        {{/if}}
+      </div>
+
+      <div class="inputbox">
+        <label for="pricePerNight"></label>
+        <input
+          type="number"
+          id="pricePerNight"
+          name="pricePerNight"
+          placeholder="pricePerNight"
+          value="{{values.pricePerNight}}"
+          step=".01"
+        /><br />
+        {{#if errStr.pricePerNight}}
+          <p style="color: red;">{{errStr.pricePerNight}}</p>
+        {{/if}}
+      </div>
+
+      <div class="inputbox">
+        <label for="city"></label>
+        <input
+          type="text"
+          id="headline"
+          name="city"
+          placeholder="city"
+          value="{{values.city}}"
+        /><br />
+      </div>
+
+      <div class="inputbox">
+        <label for="province"></label>
+        <input
+          type="text"
+          id="province"
+          name="province"
+          placeholder="province"
+          value="{{values.province}}"
+        /><br />
+      </div>
+
+      <div class="inputbox">
+        <label for="imageUrl"></label>
+        <input
+          type="file"
+          id="imageUrl"
+          name="imageUrl"
+          placeholder="imageUrl"
+          value="{{values.imageUrl}}"
+        /><br />
+      </div>
+
+      <div class="inputbox">
+        <label for="featuredRental"></label>
+        <input
+          type="checkbox"
+          id="featuredRental"
+          name="featuredRental"
+          placeholder="featuredRental"
+          value="{{values.featuredRental}}"
+        /><br />
+      </div>
+
+      <div class="inputbox">
+        <input type="submit" value="Register" />
+      </div>
+    </form>
+  </div>
+</div>

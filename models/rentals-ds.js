@@ -18,7 +18,7 @@ var rentals = [
       pricePerNight: 125.99,
       city: "Scugog",
       province: "Ontario",
-      imageUrl: "./images/rental2.jpg",
+      imageUrl: "/images/rental2.jpg",
       featuredRental: true,
     },
     {
@@ -29,7 +29,7 @@ var rentals = [
       pricePerNight: 125.99,
       city: "Scugog",
       province: "Ontario",
-      imageUrl: "./images/rentalSecond.jpg",
+      imageUrl: "/images/rentalSecond.jpg",
       featuredRental: true,
     },
     {
@@ -40,7 +40,7 @@ var rentals = [
       pricePerNight: 125.99,
       city: "Scugog",
       province: "Ontario",
-      imageUrl: "./images/rentalSmall.jpg",
+      imageUrl: "/images/rentalSmall.jpg",
       featuredRental: false,
     },
     {
@@ -51,7 +51,7 @@ var rentals = [
       pricePerNight: 125.99,
       city: "Toronto",
       province: "Ontario",
-      imageUrl: "./images/4rental.jpg",
+      imageUrl: "/images/4rental.jpg",
       featuredRental: false,
     },
     {
@@ -62,7 +62,7 @@ var rentals = [
       pricePerNight: 125.99,
       city: "Toronto",
       province: "Ontario",
-      imageUrl: "./images/3rdrental.jpg",
+      imageUrl: "/images/3rdrental.jpg",
       featuredRental: false,
     }
   ];
@@ -120,3 +120,5 @@ var rentals = [
       }
       return tempArr;
     };
+
+    module.exports.rentalsArray = rentals;

@@ -13,15 +13,15 @@
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
-const validation = require("./models/validation");
 const exphbs = require("express-handlebars"); 
 //set up mongoose
 const mongoose = require("mongoose");
 //set up dot env
 const dotenv = require("dotenv");
 dotenv.config({path:"./dotenv/sendgridKey.env"});
+const fileUpload = require("express-fileupload");
 const app = express();
-var username;
+
 
 // Set up Handlebars
 app.engine(".hbs", exphbs.engine({
@@ -35,6 +35,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Set up "assets" folder so it is public.
 app.use(express.static(path.join(__dirname, "/assets")));
+
+//set-up fileUpload
+app.use(fileUpload());
 
 //set up express-session
 app.use(session({
@@ -58,6 +61,10 @@ app.use("/",generalController);
 //rentalsControllers
 const rentalsController = require("./controllers/rentalsController");
 app.use("/rentals",rentalsController);
+
+//load-data Controllers
+const loadDataController = require("./controllers/loadDataController")
+app.use("/load-data",loadDataController);
 
 
 
