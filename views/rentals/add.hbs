@@ -24,8 +24,8 @@
           placeholder="numSleeps"
           value="{{values.numSleeps}}"
         /><br />
-        {{#if errStr.numSleeps}}
-          <p style="color: red;">{{errStr.numSleeps}}</p>
+        {{#if errorMessages.numSleeps}}
+          <p style="color: red;">{{errorMessages.numSleeps}}</p>
         {{/if}}
       </div>
 
@@ -38,8 +38,8 @@
           placeholder="numBedrooms"
           value="{{values.numBedrooms}}"
         /><br />
-        {{#if errStr.numBedrooms}}
-          <p style="color: red;">{{errStr.numBedrooms}}</p>
+        {{#if errorMessages.numBedrooms}}
+          <p style="color: red;">{{errorMessages.numBedrooms}}</p>
         {{/if}}
       </div>
 
@@ -52,8 +52,8 @@
           placeholder="numBathrooms"
           value="{{values.numBathrooms}}"
         /><br />
-        {{#if errStr.numBathrooms}}
-          <p style="color: red;">{{errStr.numBathrooms}}</p>
+        {{#if errorMessages.numBathrooms}}
+          <p style="color: red;">{{errorMessages.numBathrooms}}</p>
         {{/if}}
       </div>
 
@@ -67,8 +67,8 @@
           value="{{values.pricePerNight}}"
           step=".01"
         /><br />
-        {{#if errStr.pricePerNight}}
-          <p style="color: red;">{{errStr.pricePerNight}}</p>
+        {{#if errorMessages.pricePerNight}}
+          <p style="color: red;">{{errorMessages.pricePerNight}}</p>
         {{/if}}
       </div>
 

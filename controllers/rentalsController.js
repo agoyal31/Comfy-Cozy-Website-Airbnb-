@@ -114,7 +114,8 @@ router.get("/add", (req, res) => {
 
 // rentals/add route post part
 router.post("/add", (req, res) => {
-  var errStr = {};
+  var rangeNumberFields = true;
+  var errorMessages = {};
 
   var {
     headline,
@@ -128,24 +129,29 @@ router.post("/add", (req, res) => {
   } = req.body;
 
   if (numSleeps < 0 || numSleeps > 100) {
-    errStr.numSleeps = "number of sleep value should be between 0 and 100";
+    rangeNumberFields = false;
+    errorMessages.numSleeps = "number of sleep value should be between 0 and 100";
   }
 
   if (numBathrooms < 0 || numBathrooms > 100) {
-    errStr.numBathrooms =
+    rangeNumberFields = false;
+    errorMessages.numBathrooms =
       "number of bathrooms value should be between 0 and 100";
   }
   if (numBedrooms < 0 || numBedrooms > 100) {
-    errStr.numBedrooms = "number of bedrooms value should be between 0 and 100";
+    rangeNumberFields = false;
+    errorMessages.numBedrooms = "number of bedrooms value should be between 0 and 100";
   }
 
   if (pricePerNight <= 0.0) {
-    errStr.pricePerNight = "price per night value should be greater than 0.00";
+    rangeNumberFields = false;
+    errorMessages.pricePerNight = "price per night value should be greater than 0.00";
   }
 
-  if (Object.keys(errStr).length > 0) {
+  if (!rangeNumberFields) {
     res.render("rentals/add", {
-      errStr,
+      errorMessages,
+      values: req.body
     });
   } else {
     var featured;
