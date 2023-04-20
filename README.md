@@ -10,4 +10,4 @@ Course/Section: WEB322 NCC
 
 ## Project URLs
 GitHub Repo   : https://github.com/agoyal31/web322-agoyal31
-Cyclic URL    : https://wild-gray-horse-gown.cyclic.app/
+Cyclic URL    : https://breakable-jade-lingerie.cyclic.app
