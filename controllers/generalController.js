@@ -4,26 +4,33 @@ const router = express.Router();
 const models = require("../models/rentals-ds");
 const validation = require("../models/validation");
 const userModel = require("../models/userModel");
-const rentalsModel = require("../models/rentalsModel")
+const rentalsModel = require("../models/rentalModel");
 var username;
+var totalBeforeTax = 0;
+var valueAddedTax = 0;
+var total = 0;
 
 router.get("/", (req, res) => {
-  rentalsModel.find({
-    featuredRental:true
-  }).then(foundRental =>{
-    if (foundRental){
-    console.log("found the rentals" + foundRental)
-    let featuredRentalsHome = foundRental.map(value => value.toObject());
-    res.render("general/home", {
-      rentalProperty: featuredRentalsHome
+  rentalsModel
+    .find({
+      featuredRental: true,
     })
-  }
-    else{ 
-      console.log("No featured rentals found from the rentals list")
-    }
-  }).catch(err => {
-    console.log(`Cannot try to find the rentals to display on homepage ${err}`)
-  })
+    .then((foundRental) => {
+      if (foundRental) {
+        console.log("found the rentals" + foundRental);
+        let featuredRentalsHome = foundRental.map((value) => value.toObject());
+        res.render("general/home", {
+          rentalProperty: featuredRentalsHome,
+        });
+      } else {
+        console.log("No featured rentals found from the rentals list");
+      }
+    })
+    .catch((err) => {
+      console.log(
+        `Cannot try to find the rentals to display on homepage ${err}`
+      );
+    });
 });
 
 router.get("/sign-up", (req, res) => {
@@ -35,8 +42,8 @@ router.get("/log-in", (req, res) => {
 });
 
 router.get("/welcome", (req, res) => {
-  res.render("general/welcome",{
-    data: username
+  res.render("general/welcome", {
+    data: username,
   });
 });
 
@@ -135,10 +142,12 @@ router.post("/log-in", (req, res) => {
               // Create a new session by storing the user document to the session
               req.session.user = user;
 
-
-              if (req.session.isClerk = req.body.selected === "Clerk") {
+              if ((req.session.isClerk = req.body.selected === "Clerk")) {
                 res.redirect("rentals/list");
-              } else {
+              } 
+              if 
+                ((req.session.isCustomer = req.body.selected === "Customer")){
+                  req.session.cart = [];
                 res.redirect("/cart");
               }
               //res.redirect("/welcome");
@@ -180,17 +189,15 @@ router.post("/log-in", (req, res) => {
 });
 
 router.get("/cart", (req, res) => {
-    if (req.session.user){
-        if (!req.session.isClerk){
-            res.render("general/cart");
-        }
-        else{
-            res.status(401).send("Not Authorized to view this page");
-        }
+  if (req.session.user) {
+    if (!req.session.isClerk) {
+      res.render("general/cart");
+    } else {
+      res.status(401).send("Not Authorized to view this page");
     }
-    else{
-        res.status(401).send("Not Authorized to view this page");
-    }
+  } else {
+    res.status(401).send("Not Authorized to view this page");
+  }
 });
 
 router.get("/logout", (req, res) => {
@@ -198,4 +205,119 @@ router.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/log-in");
 });
+
+// rent route for the cart
+router.get("/rent/:rentalId", (req, res) => {
+  var isPresent = false;
+  var rentID = req.params.rentalId;
+  var cart = req.session.cart || [];
+
+  rentalsModel
+    .findOne({ _id: rentID })
+    .lean()
+    .then((propFound) => {
+
+      cart.forEach((eachProp) => {
+        if (eachProp.id == rentID) {
+          eachProp.numberOfNights++;
+          eachProp.priceOfStay = eachProp.priceOfStay * eachProp.numberOfNights;
+          isPresent = true;
+        }
+      });
+
+      if (isPresent) {
+        console.log("Cart Updated");
+
+      } else {
+        
+        cart.push({
+          id: rentID,
+          numberOfNights: 1,
+          priceOfStay: propFound.pricePerNight,
+          propFound,
+        });
+
+        console.log("rendering to the cart page.");
+      }
+
+      totalBeforeTax = 0;
+
+      cart.forEach((allRentals) => {
+        totalBeforeTax = totalBeforeTax + allRentals.priceOfStay;
+        valueAddedTax = totalBeforeTax * 0.1;
+        total = totalBeforeTax + valueAddedTax;
+      });
+
+      res.render("general/cart", {
+        title: "Cart",
+        addedCart: cart,
+        totalBeforeTax: totalBeforeTax.toFixed(2),
+        valueAddedTax: valueAddedTax.toFixed(2),
+        total: total.toFixed(2),
+      });
+    })
+    .catch((err) => {
+      console.log("Cannot search in the db" + err);
+    });
+});
+
+router.get("/remove/:rentalId", (req, res) => {
+  var rentID = req.params.rentalId;
+  var cart = req.session.cart || [];
+
+  const positionIndex = cart.findIndex((rental) => rental.id == rentID);
+
+  if (positionIndex >= 0) {
+    displayMsg = `Rental "${cart[positionIndex].propFound.headline}" is removed.`;
+
+    totalBeforeTax -= cart[positionIndex].priceOfStay;
+    valueAddedTax = totalBeforeTax * 0.1;
+    total = totalBeforeTax + valueAddedTax;
+
+    cart.splice(positionIndex, 1);
+  } else {
+    displayMsg = "Error finding rentals in the cart";
+  }
+
+  res.render("general/cart", {
+    title: "Cart",
+    addedCart: cart,
+    totalBeforeTax: totalBeforeTax.toFixed(2),
+    valueAddedTax: valueAddedTax.toFixed(2),
+    total: total.toFixed(2),
+  });
+});
+
+router.get("/place-order", (req, res) => {
+  console.log("Emptying cart");
+
+
+  const sgMail = require("@sendgrid/mail");
+  sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+
+  const msg = {
+    to: req.session.user.email,
+    from: "avnigoel113@gmail.com",
+    subject: "Checkout Summary",
+    html: `Hello ${req.session.user.firstname}, Thank you for choosing Cozy And Comfy. Hope you will enjoy your stay with us and make it most memorable one`
+  };
+
+  //emptying the cart here
+  req.session.cart = [];
+
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Rendering to home page");
+      res.redirect("/");
+    })
+
+    .catch((err) => {
+      console.log(err);
+      res.render("general/cart", {
+        title: "cart",
+      });
+    });
+});
+
 module.exports = router;

@@ -7,8 +7,8 @@
         <h1> {{cityProvince}} </h1>
     </div>
     <div class="rentalsGroup">
-        {{#each rentals}}
-        {{>rental}}
+        {{#each rentalsToBeDisplayed}}
+        {{>rental ifCustomer  = ../../isCustomer}}
         {{/each}}
     </div>
     {{/each}}

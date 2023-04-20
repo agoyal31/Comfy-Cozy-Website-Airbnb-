@@ -1,11 +1,11 @@
 <h1 class="heading">Hello {{user.firstName}}! Welcome to List page</h1>
-<h2 class="heading">Step to <a href="/load-data/rentals">load data page</a>with one click.</h2>
+<h2 class="heading">Click <a style="text-decoration: underline;" href="/load-data/rentals"><b>load data page</b></a> to load the rentals from Database.</h2>
 <div class="listGroupRentalGrid">
 {{#each rentalsToGroup}}
 <div class="listPageRentalGroup">
 {{>rental}}
 <a href="/rentals/add">Add</a> 
-<a href="/rentals/remove">Remove</a> 
+<a href="/rentals/remove/{{this._id}}">Remove</a> 
 <a href="/rentals/edit/{{this._id}}">Edit</a>
 </div>
 {{/each}}

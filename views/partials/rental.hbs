@@ -2,5 +2,9 @@
   <img src={{this.imageUrl}} alt="property1">
   <h3>{{this.headline}}</h3>
   <p>Sleeps{{this.numSleeps}} &#x2022 {{this.numBedrooms}}BHK &#x2022 {{this.numBathrooms}}BA &#x2022 price:${{this.pricePerNight}}/night</p>
+  
+    {{#if ifCustomer}}
+    <a href="/rent/{{this._id}}">Rent</a>
+    {{/if}}
 </div>    
 

@@ -1,6 +1,6 @@
 <div class="box">
   <div class="center">
-    <h1>Looking to add new rental property!</h1>
+    <h3>Looking to add new rental property!</h3>
     <p>you end up at right place</p>
     <form action="/rentals/add" method="POST" enctype="multipart/form-data">
 
@@ -30,6 +30,7 @@
       </div>
 
       <div class="inputbox">
+
         <label for="numBedrooms"></label>
         <input
           type="number"
@@ -101,18 +102,15 @@
           id="imageUrl"
           name="imageUrl"
           placeholder="imageUrl"
-          value="{{values.imageUrl}}"
         /><br />
       </div>
 
       <div class="inputbox">
-        <label for="featuredRental"></label>
+        <label for="featuredRental">Is FeaturedRental?</label>
         <input
           type="checkbox"
           id="featuredRental"
           name="featuredRental"
-          placeholder="featuredRental"
-          value="{{values.featuredRental}}"
         /><br />
       </div>
 

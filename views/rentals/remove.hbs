@@ -1,0 +1,6 @@
+<h1>Are you sure you want to delete the record with id- {{removedId}}</h1>
+<form action="/rentals/remove" method="POST">
+<input type="hidden" value="{{removedId}}" name="id">
+<input type="submit" value="yes, delete the record">
+<a href="/">No, do not delete!</a>
+</form>

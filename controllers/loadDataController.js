@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const models = require("../models/rentals-ds")
-const rentalsModel = require("../models/rentalsModel")
+const rentalsModel = require("../models/rentalModel")
 var displayMessage;
 
 router.get("/rentals", (req, res)=> {
@@ -25,7 +25,7 @@ router.get("/rentals", (req, res)=> {
                 rentalsModel.insertMany(models.rentalsArray)
                 .then(() => {
                     displayMessage = "Rental properties are added to the database"
-                    res.render("load-data/rentals", {
+                    res.redirect("/load-data/rentals", {
                         title: "Rentals", 
                         displayMessage
                     })

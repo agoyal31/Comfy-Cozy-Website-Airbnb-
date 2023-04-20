@@ -36,7 +36,8 @@
     <article>
         <div class="rentals">
     {{#each rentalProperty}}
-    {{>rental}}
+    {{>rental ifCustomer = ../isCustomer}}
+
     {{/each}}
         </div>
     </article>

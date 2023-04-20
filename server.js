@@ -20,6 +20,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config({path:"./dotenv/sendgridKey.env"});
 const fileUpload = require("express-fileupload");
+const MongoStore = require('connect-mongo');
 const app = express();
 
 
@@ -43,7 +44,8 @@ app.use(fileUpload());
 app.use(session({
   secret: process.env.SESSION_SECRET, //protect the cookies
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_CONN_STRING})
 }));
 
 app.use((req,res,next)=>{
@@ -51,6 +53,8 @@ app.use((req,res,next)=>{
   //this means evry single handlebars file can access this variable
   res.locals.user = req.session.user;
   res.locals.isClerk = req.session.isClerk;//everytime the request comes in "req.session.user" it will be copied or passed to locals
+  res.locals.isCustomer = req.session.isCustomer;
+  res.locals.cart = req.session.cart;
   next();
 });
 
